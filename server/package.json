@@ -1,11 +1,19 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Back-end code for the home for my character info for fanfics",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "seed": "node seeds/seed.js",
+    "watch": "nodemon server.js"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Laura E. Cole",
+  "license": "MIT",
+  "dependencies": {
+    "@apollo/server": "^4.10.2",
+    "express": "^4.19.2",
+    "graphql": "^16.8.1"
+  }
 }
