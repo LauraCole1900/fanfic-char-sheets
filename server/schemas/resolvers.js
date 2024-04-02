@@ -37,7 +37,7 @@ const resolvers = {
         });
       }
 
-      const correctPw = await user.isCorrectPassword(args.password);
+      const correctPw = await user.checkPassword(args.password);
 
       if (!correctPw) {
         throw new GraphQLError("Incorrect credentials", {

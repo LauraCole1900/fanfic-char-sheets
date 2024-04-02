@@ -74,8 +74,8 @@ type Query {
 
 type Mutation {
   login(email: String!, password: String!): Auth
-  createChar(input: CharInput!): Character
-  updateChar(id: ID! input: CharInput!): Character
+  createChar(input: CharacterInput!): Character
+  updateChar(id: ID! input: CharacterInput!): Character
   deleteChar(id: ID!): Character
 }
 `;
