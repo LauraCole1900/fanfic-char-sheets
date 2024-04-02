@@ -1,3 +1,5 @@
-export { default as resolvers } from './resolvers';
-export { dateScalar } from './scalars';
-export { default as typeDefs } from './typedefs';
+const resolvers = require('./resolvers');
+const dateScalar = require('./scalars');
+const typeDefs = require('./typedefs');
+
+module.exports = { resolvers, dateScalar, typeDefs };

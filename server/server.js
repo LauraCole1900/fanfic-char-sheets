@@ -1,10 +1,10 @@
-import express from 'express';
-import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
-import path from 'path';
+const express = require('express');
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@apollo/server/express4');
+const path = require('path');
 
-import { dateScalar, typeDefs, resolvers } from './schemas';
-import db from './config/connection';
+const { dateScalar, typeDefs, resolvers } = require('./schemas');
+const sequelize = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -31,7 +31,7 @@ const startApolloServer = async () => {
     });
   }
 
-  db.once('open', () => {
+  sequelize.sync({force: false}).then(() => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
       console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);

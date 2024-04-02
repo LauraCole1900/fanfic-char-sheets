@@ -34,6 +34,10 @@ type User {
   email: String!
   password: String!
 }
+
+type Query {
+  me: User
+}
 `;
 
-export default typeDefs;
+module.exports = typeDefs;
