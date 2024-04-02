@@ -21,7 +21,39 @@ const resolvers = {
       return await Character.findAll({});
     },
     singleChar: async (_, args) => {
-      return await Character.findByPk(args.id)
+      return await Character.findByPk(args.id, {
+        include: [{ model: Character }]
+      })
+    }
+  },
+
+  Mutation: {
+    login: async (_, args) => {
+      const user = await User.findOne({ email: args.email });
+
+      if (!user) {
+        throw new GraphQLError("Incorrect credentials", {
+          extensions: { code: "FORBIDDEN" },
+        });
+      }
+
+      const correctPw = await user.isCorrectPassword(args.password);
+
+      if (!correctPw) {
+        throw new GraphQLError("Incorrect credentials", {
+          extensions: { code: "FORBIDDEN" },
+        });
+      }
+
+      const token = auth.signToken(user);
+      return { token, user };
+    },
+    createChar: async (_, args) => {
+      const character = await Character.create(args)
+      return character;
+    },
+    updateChar: async (_, args) => {
+
     }
   }
 };
