@@ -37,6 +37,8 @@ type User {
 
 type Query {
   me: User
+  allChars: [Character]
+  singleChar(id: ID!): Character
 }
 `;
 
