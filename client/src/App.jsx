@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context";
 import { Container } from 'react-bootstrap';
-// import { NavBar } from './components/navbar';
+import NavBar from './components/navbar';
 import './App.css';
 
 //=====================//
@@ -49,7 +49,7 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
-        {/* <NavBar /> */}
+        <NavBar />
         <Container>
           <Outlet />
         </Container>
