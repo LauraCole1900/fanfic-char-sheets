@@ -53,7 +53,18 @@ const resolvers = {
       return character;
     },
     updateChar: async (_, args) => {
-
+      const updatedChar = Character.update(
+        { ...args },
+        {
+          where: {
+            id: args.id
+          }
+        });
+      return updatedChar;
+    },
+    deleteChar: async (_, args) => {
+      const deletedChar = Character.destroy({ where: { id: args.id } });
+      return deletedChar;
     }
   }
 };
