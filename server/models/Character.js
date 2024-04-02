@@ -64,21 +64,21 @@ Character.init(
     fatherId: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'Character',
+        model: 'character',
         key: 'id'
       }
     },
     motherId: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'Character',
+        model: 'character',
         key: 'id'
       }
     },
     spouseId: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'Character',
+        model: 'character',
         key: 'id'
       }
     },

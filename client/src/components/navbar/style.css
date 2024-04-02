@@ -1,0 +1,13 @@
+.my-nav {
+  width: 100vw;
+  margin: 0;
+}
+
+.navbar-collapse {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navLink {
+  margin-right: 1em;
+}

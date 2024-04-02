@@ -6,7 +6,7 @@ import { QUERY_ALL_CHARS } from "../../utils/gql";
 const ListPage = () => {
   const [characters, setCharacters] = useState([]);
 
-  const { loading, data } = useQuery(QUERY_ALL_CHARS);
+  const { error, loading, data } = useQuery(QUERY_ALL_CHARS);
 
   useEffect(() => {
     if (data) {
@@ -18,9 +18,13 @@ const ListPage = () => {
     return <h1>Loading....</h1>
   }
 
+  if (error) {
+    console.error(JSON.parse(JSON.stringify(error)));
+  }
+
   return (
     <>
-      <ul>
+      <ul className='namesList'>
         {characters.map(character => (
           <li key={character.id}><Link to={`/character/${character.id}`}>{character.firstName} {character.lastName}</Link></li>
         ))}

@@ -26,9 +26,21 @@ query allChars {
     birthLoc
     marriedLoc
     deathLoc
-    fatherId
-    motherId
-    spouseId
+    father {
+      id
+      firstName
+      lastName
+    }
+    mother {
+      id
+      firstName
+      lastName
+    }
+    spouse {
+      id
+      firstName
+      lastName
+    }
     milBranch
     occupation
     liveBirth
@@ -57,9 +69,45 @@ query singleChar($charId: ID!) {
     birthLoc
     marriedLoc
     deathLoc
-    fatherId
-    motherId
-    spouseId
+    father {
+      id
+      firstName
+      middleName
+      lastName
+    }
+    mother {
+      id
+      firstName
+      middleName
+      lastName
+    }
+    spouse {
+      id
+      firstName
+      middleName
+      lastName
+      birthDate
+    }
+    hisKids {
+      id
+      firstName
+      middleName
+      liveBirth
+      miscarriage
+    }
+    herKids {
+      id
+      firstName
+      middleName
+      liveBirth
+      miscarriage
+    }
+    Married {
+      id
+      firstName
+      middleName
+      lastName
+    }
     milBranch
     occupation
     liveBirth

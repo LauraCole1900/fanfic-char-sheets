@@ -18,15 +18,15 @@ Character.hasOne(User, {
 // Father to children relationship
 
 Character.hasMany(Character, {
-  foreignKey: 'father_id',
-  as: 'Sired',
+  foreignKey: 'fatherId',
+  as: 'hisKids',
   sourceKey: 'id',
   onDelete: 'NO ACTION',
   onUpdate: 'NO ACTION'
 });
 
 Character.belongsTo(Character, {
-  foreignKey: 'father_id',
+  foreignKey: 'fatherId',
   as: 'father',
   targetKey: 'id'
 });
@@ -36,15 +36,15 @@ Character.belongsTo(Character, {
 // Mother to children relationship
 
 Character.hasMany(Character, {
-  foreignKey: 'mother_id',
-  as: 'Bore',
+  foreignKey: 'motherId',
+  as: 'herKids',
   sourceKey: 'id',
   onDelete: 'NO ACTION',
   onUpdate: 'NO ACTION'
 });
 
 Character.belongsTo(Character, {
-  foreignKey: 'mother_id',
+  foreignKey: 'motherId',
   as: 'mother',
   targetKey: 'id'
 });
@@ -54,7 +54,7 @@ Character.belongsTo(Character, {
 // Character to spouse relationship
 
 Character.hasOne(Character, {
-  foreignKey: 'spouse_id',
+  foreignKey: 'spouseId',
   as: 'Married',
   sourceKey: 'id',
   onDelete: 'NO ACTION',
@@ -62,7 +62,7 @@ Character.hasOne(Character, {
 });
 
 Character.belongsTo(Character, {
-  foreignKey: 'spouse_id',
+  foreignKey: 'spouseId',
   as: 'spouse',
   targetKey: 'id'
 });

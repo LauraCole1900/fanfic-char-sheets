@@ -21,9 +21,14 @@ const resolvers = {
       return await Character.findAll({});
     },
     singleChar: async (_, args) => {
-      return await Character.findByPk(args.id, {
-        include: [{ model: Character }]
-      })
+      const character = await Character.findOne({
+        where: {
+          id: args.id
+        }
+      }, {
+        include: [{ model: Character, as: 'father', required: true }, { model: Character, as: 'mother', required: true }, { model: Character, as: 'spouse', required: true }]
+      });
+      return character;
     }
   },
 
@@ -65,6 +70,35 @@ const resolvers = {
     deleteChar: async (_, args) => {
       const deletedChar = Character.destroy({ where: { id: args.id } });
       return deletedChar;
+    }
+  },
+
+  Character: {
+    father: async (character, _) => {
+      return Character.findByPk(character.fatherId);
+    },
+    mother: async (character, _) => {
+      return Character.findByPk(character.motherId);
+    },
+    hisKids: async (character, _) => {
+      return Character.findAll({
+        where: {
+          fatherId: character.id
+        }
+      });
+    },
+    herKids: async (character, _) => {
+      return Character.findAll({
+        where: {
+          motherId: character.id
+        }
+      });
+    },
+    spouse: async (character, _) => {
+      return Character.findByPk(character.spouseId);
+    },
+    Married: async (character, _) => {
+      return Character.findByPk(character.spouseId);
     }
   }
 };

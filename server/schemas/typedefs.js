@@ -53,6 +53,12 @@ type Character {
   lifeNotes: String
   deathNotes: String
   fandom: [String!]!
+  father: Character
+  mother: Character
+  spouse: Character
+  hisKids: [Character]
+  herKids: [Character]
+  Married: Character
 }
 
 type User {
