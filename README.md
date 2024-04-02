@@ -35,7 +35,7 @@ This project is intended to be used for me to keep track of character details fo
 
 ## Technologies Used
 
-[![PostgreSQL](https://img.shields.io/badge/built%20with-PostgreSQL-336791)](https://www.postgresql.org/) [![Express.js](https://img.shields.io/badge/built%20with-Express.js-303030)](https://expressjs.com/) [![React](https://img.shields.io/badge/built%20with-React-61dbfb)](https://reactjs.org/) [![Node.js](https://img.shields.io/badge/built%20with-Node.js-3c873a)](https://nodejs.org/en/) [![GraphQL](https://img.shields.io/badge/built%20with-GraphQL-c00095)](https://graphql.org/) [![JavaScript](https://img.shields.io/badge/built%20with-JavaScript-f0db4f)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![Sequelize](https://img.shields.io/badge/built%20with-Sequelize-3c76c3)](https://sequelize.org/) [![JWT](https://img.shields.io/badge/built%20with-JWT-d63aff)](https://jwt.io/)
+[![PostgreSQL](https://img.shields.io/badge/built%20with-PostgreSQL-336791)](https://www.postgresql.org/) [![Sequelize](https://img.shields.io/badge/built%20with-Sequelize-3c76c3)](https://sequelize.org/) [![Node.js](https://img.shields.io/badge/built%20with-Node.js-3c873a)](https://nodejs.org/en/) [![Express.js](https://img.shields.io/badge/built%20with-Express.js-303030)](https://expressjs.com/) [![GraphQL](https://img.shields.io/badge/built%20with-GraphQL-c00095)](https://graphql.org/) [![React](https://img.shields.io/badge/built%20with-React-61dbfb)](https://reactjs.org/) [![JavaScript](https://img.shields.io/badge/built%20with-JavaScript-f0db4f)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![JWT](https://img.shields.io/badge/built%20with-JWT-d63aff)](https://jwt.io/)
 
 ## Tests
 
