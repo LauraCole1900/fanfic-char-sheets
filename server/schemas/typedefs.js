@@ -19,7 +19,8 @@ type Character {
   milBranch: String
   liveBirth: Boolean!
   miscarriage: Boolean!
-  deathNotes: String
+  deathNotes: String,
+  fandom: [String!]!
 }
 `;
 
