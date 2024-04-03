@@ -1,5 +1,27 @@
 const Character = require('./Character');
+const Fandom = require('./Fandom');
+const Fans = require('./Fans');
 const User = require('./User');
+
+
+// User to fandom relationship
+
+User.belongsToMany(Fandom, {
+  through: {
+    model: Fans,
+    unique: false
+  },
+  as: 'favorite_fandoms',
+});
+
+Fandom.belongsToMany(User, {
+  through: {
+    model: Fans,
+    unique: false
+  },
+  as: 'fandom_fans'
+});
+
 
 // User to character relationship
 
@@ -12,6 +34,19 @@ User.hasMany(Character, {
 Character.hasOne(User, {
   foreignKey: 'user_id'
 });
+
+
+// Fandom to character relationship
+
+Fandom.hasMany(Character, {
+  foreignKey: 'fandom_id',
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE'
+});
+
+Character.belongsTo(Fandom, {
+  foreignKey: 'fandom_id'
+})
 
 
 
@@ -32,7 +67,6 @@ Character.belongsTo(Character, {
 });
 
 
-
 // Mother to children relationship
 
 Character.hasMany(Character, {
@@ -48,7 +82,6 @@ Character.belongsTo(Character, {
   as: 'mother',
   targetKey: 'id'
 });
-
 
 
 // Character to spouse relationship
@@ -69,4 +102,4 @@ Character.belongsTo(Character, {
 
 
 
-module.exports = { Character, User };
+module.exports = { Character, Fandom, Fans, User };

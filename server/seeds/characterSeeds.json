@@ -2,7 +2,7 @@
   {
     "userId": 1,
     "firstName": "Gwilym",
-    "nickName": null,
+    "nickName": "Gwilym",
     "middleName": "Pedr",
     "lastName": "Lewis",
     "gender": "male",
@@ -22,7 +22,7 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": "Died from complications of having been a coal miner",
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
@@ -47,7 +47,7 @@
     "miscarriage": false,
     "lifeNotes": "developed dementia",
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
@@ -72,12 +72,12 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": "death by DV",
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
     "firstName": "Michael",
-    "nickName": null,
+    "nickName": "Michael",
     "middleName": "Seamus Brian",
     "lastName": "O'Connell",
     "gender": "male",
@@ -97,12 +97,12 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": "Died by drowning after rolling his car into a stream. He was drunk at the time, probably from finding out that his oldest son had just gone to prison.",
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
     "firstName": "Molly",
-    "nickName": null,
+    "nickName": "Molly",
     "middleName": "Erin",
     "lastName": "O'Connell",
     "gender": "female",
@@ -122,12 +122,12 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
     "firstName": "Bridget",
-    "nickName": null,
+    "nickName": "Bridget",
     "middleName": "Maureen",
     "lastName": "O'Connell",
     "gender": "female",
@@ -147,7 +147,7 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": "died from complications of childbirth",
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
@@ -172,12 +172,12 @@
     "miscarriage": false,
     "lifeNotes": "went to prison in 1944 for assaulting his XO",
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
     "firstName": "Anna",
-    "nickName": null,
+    "nickName": "Anna",
     "middleName": "Elinor",
     "lastName": "O'Connell",
     "gender": "female",
@@ -197,7 +197,7 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
@@ -222,12 +222,12 @@
     "miscarriage": true,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
     "firstName": "Seamus",
-    "nickName": null,
+    "nickName": "Seamus",
     "middleName": "Cormac",
     "lastName": "O'Connell",
     "gender": "male",
@@ -247,12 +247,12 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": "killed while on liberty after being caught stealing, cheating, or both",
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
     "firstName": "Brian",
-    "nickName": null,
+    "nickName": "Brian",
     "middleName": "Niall",
     "lastName": "O'Connell",
     "gender": "male",
@@ -272,7 +272,7 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
@@ -297,12 +297,12 @@
     "miscarriage": true,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
     "firstName": "Elaine",
-    "nickName": null,
+    "nickName": "Elaine",
     "middleName": "Charlotte",
     "lastName": "O'Connell",
     "gender": "female",
@@ -322,7 +322,7 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
@@ -347,7 +347,7 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
@@ -372,12 +372,12 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": "went down with the USS Indianapolis and was eaten by sharks",
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
     "firstName": "Colleen",
-    "nickName": null,
+    "nickName": "Colleen",
     "middleName": "Maeve",
     "lastName": "O'Connell",
     "gender": "female",
@@ -397,7 +397,7 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
@@ -422,7 +422,7 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
@@ -447,12 +447,12 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
     "firstName": "Sarah",
-    "nickName": null,
+    "nickName": "Sarah",
     "middleName": "Sophia",
     "lastName": "O'Connell",
     "gender": "female",
@@ -472,7 +472,7 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
@@ -497,7 +497,7 @@
     "miscarriage": true,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
@@ -522,7 +522,7 @@
     "miscarriage": true,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
@@ -547,7 +547,7 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   },
   {
     "userId": 1,
@@ -572,6 +572,6 @@
     "miscarriage": false,
     "lifeNotes": null,
     "deathNotes": null,
-    "fandom": ["Band of Brothers"]
+    "fandom": 1
   }
 ]

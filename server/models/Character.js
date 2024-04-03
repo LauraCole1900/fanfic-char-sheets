@@ -102,9 +102,13 @@ Character.init(
     deathNotes: {
       type: DataTypes.STRING,
     },
-    fandom: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: false
+    fandomId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'fandom',
+        key: 'id'
+      }
     }
   },
   {

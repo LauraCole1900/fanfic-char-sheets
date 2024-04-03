@@ -23,7 +23,12 @@ input CharacterInput {
   miscarriage: Boolean!
   lifeNotes: String
   deathNotes: String
-  fandom: [String!]!
+  fandomId: ID!
+}
+
+type Fandom {
+  id: ID!
+  fandomName: String!
 }
 
 type Character {
@@ -50,7 +55,7 @@ type Character {
   miscarriage: Boolean!
   lifeNotes: String
   deathNotes: String
-  fandom: [String!]!
+  fandomId: ID!
   father: Character
   mother: Character
   spouse: Character
