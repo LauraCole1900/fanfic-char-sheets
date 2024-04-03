@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.jsx';
-import { CharacterForm, CharSheet, Error, ListPage, LoginPage } from './components/pages';
+import { CharacterForm, CharSheet, Error, LandingPage, ListPage, LoginPage } from './components/pages';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 
@@ -13,11 +13,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ListPage />
+        element: <LandingPage />
       },
       {
         path: '/login',
         element: <LoginPage />
+      },
+      {
+        path: 'characters/:fandomId',
+        element: <ListPage />
       },
       {
         path: '/character/:charId',

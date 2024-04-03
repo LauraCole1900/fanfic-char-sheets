@@ -47,9 +47,61 @@ query allChars {
     miscarriage
     lifeNotes
     deathNotes
-    fandom
+    fandomId
   }
 }
+`;
+
+export const QUERY_FANDOM_CHARS = gql`
+query allFandomChars($fandomId: ID!) {
+  allFandomChars(fandomId: $fandomId) {
+    id
+    userId
+    firstName
+    nickName
+    middleName
+    lastName
+    gender
+    race
+    birthDate
+    marriedDate
+    deathDate
+    birthLoc
+    marriedLoc
+    deathLoc
+    father {
+      id
+      firstName
+      lastName
+    }
+    mother {
+      id
+      firstName
+      lastName
+    }
+    spouse {
+      id
+      firstName
+      lastName
+    }
+    milBranch
+    occupation
+    liveBirth
+    miscarriage
+    lifeNotes
+    deathNotes
+    fandomId
+  }
+}
+`;
+
+export const QUERY_ALL_FANDOMS = gql`
+  query allFandoms {
+    allFandoms {
+      id
+      fandomName
+    }
+  }
 `;
 
 export const QUERY_MEN = gql`
@@ -138,7 +190,7 @@ query singleChar($charId: ID!) {
     miscarriage
     lifeNotes
     deathNotes
-    fandom
+    fandomId
   }
 }
 `;

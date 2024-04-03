@@ -78,6 +78,8 @@ type Auth {
 type Query {
   me: User
   allChars: [Character]
+  allFandomChars(fandomId: ID!): [Character]
+  allFandoms: [Fandom]
   getMen(gender: String): [Character]
   getWomen(gender: String): [Character]
   singleChar(id: ID!): Character

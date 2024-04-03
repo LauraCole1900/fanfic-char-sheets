@@ -45,9 +45,19 @@ const CharSheet = () => {
               <p><span className='bold'>Married:</span> {char.marriedDate} to {char.spouse?.firstName} {char.spouse?.lastName}</p>
             }
             {hisKids.length > 0 &&
-              <p><span className='bold'>Children:</span> {hisKids.map(kid => <span key={kid.id}>{kid.firstName} {kid.middleName}, </span>)}</p>}
+              <>
+                <p className='bold'>Children:</p>
+                <ul>
+                  {hisKids.map(kid => <li key={kid.id}>{kid.firstName} {kid.middleName}</li>)}
+                </ul>
+              </>}
             {herKids.length > 0 &&
-              <p><span className='bold'>Children:</span> {herKids.map(kid => <span key={kid.id}>{kid.firstName} {kid.middleName}, </span>)}</p>}
+              <>
+                <p className='bold'>Children:</p>
+                <ul>
+                  {herKids.map(kid => <li key={kid.id}>{kid.firstName} {kid.middleName}</li>)}
+                </ul>
+              </>}
           </Col>
         </Row>
       </Container>

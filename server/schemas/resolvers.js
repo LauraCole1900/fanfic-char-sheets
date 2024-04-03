@@ -1,6 +1,6 @@
 const { GraphQLError } = require('graphql');
 const dayjs = require('dayjs');
-const { Character, User } = require('../models/index.js');
+const { Character, Fandom, Fans, User } = require('../models/index.js');
 const auth = require('../utils/auth.js');
 
 const resolvers = {
@@ -24,6 +24,17 @@ const resolvers = {
     allChars: async () => {
       return await Character.findAll({});
     },
+    allFandomChars: async (_, args) => {
+      console.log(args)
+      const characters = await Character.findAll({
+        where: { fandom_id: args.fandomId }
+      });
+      console.log(characters);
+      return characters
+    },
+    allFandoms: async () => {
+      return await Fandom.findAll({});
+    },
     getMen: async (_, args) => {
       console.log(args)
       const men = await Character.findAll({
@@ -42,7 +53,7 @@ const resolvers = {
           id: args.id
         }
       }, {
-        include: [{ model: Character, as: 'father', required: true }, { model: Character, as: 'mother', required: true }, { model: Character, as: 'spouse', required: true }]
+        include: [{ model: Character, as: 'father', required: true }, { model: Character, as: 'mother', required: true }, { model: Character, as: 'spouse', required: true }, { model: Fandom }]
       });
       return character;
     }

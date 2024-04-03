@@ -1,16 +1,22 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { QUERY_ALL_CHARS } from "../../utils/gql";
+import { QUERY_FANDOM_CHARS } from "../../utils/gql";
 
 const ListPage = () => {
+  const params = useParams();
+
   const [characters, setCharacters] = useState([]);
 
-  const { error, loading, data } = useQuery(QUERY_ALL_CHARS);
+  const { error, loading, data } = useQuery(QUERY_FANDOM_CHARS, {
+    variables: { fandomId: params.fandomId }
+  });
+  const chars = data?.allFandomChars || []
+  console.log(chars)
 
   useEffect(() => {
     if (data) {
-      setCharacters(data.allChars);
+      setCharacters(data?.allFandomChars);
     }
   }, [data]);
 
