@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.jsx';
-import { CharSheet, Error, ListPage, LoginPage } from './components/pages';
+import { CharacterForm, CharSheet, Error, ListPage, LoginPage } from './components/pages';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 
@@ -22,6 +22,14 @@ const router = createBrowserRouter([
       {
         path: '/character/:charId',
         element: <CharSheet />
+      },
+      {
+        path: '/new_character',
+        element: <CharacterForm />
+      },
+      {
+        path: '/edit_character/:charId',
+        element: <CharacterForm />
       }
     ]
   }

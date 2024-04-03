@@ -1,4 +1,5 @@
 const { GraphQLError } = require('graphql');
+const dayjs = require('dayjs');
 const { Character, User } = require('../models/index.js');
 const auth = require('../utils/auth.js');
 
@@ -6,9 +7,12 @@ const resolvers = {
   Query: {
     me: async (_, __, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          '-__v -password'
-        );
+        const userData = await User.findOne({
+          where: { id: context.user.id }
+        },
+          {
+            attributes: { exclude: ['password'] }
+          });
 
         return userData;
       }
@@ -19,6 +23,18 @@ const resolvers = {
     },
     allChars: async () => {
       return await Character.findAll({});
+    },
+    getMen: async (_, args) => {
+      console.log(args)
+      const men = await Character.findAll({
+        where: { gender: args.gender }
+      });
+      return men;
+    },
+    getWomen: async (_, args) => {
+      return await Character.findAll({
+        where: { gender: args.gender }
+      })
     },
     singleChar: async (_, args) => {
       const character = await Character.findOne({
@@ -53,8 +69,11 @@ const resolvers = {
       const token = auth.signToken(user);
       return { token, user };
     },
-    createChar: async (_, args) => {
-      const character = await Character.create(args)
+    createChar: async (_, args, context) => {
+      const birthday = dayjs(args.birthDate);
+      const weddingday = dayjs(args.marriageDate);
+      const deathday = dayjs(args.deathDate);
+      const character = await Character.create({ ...args, birthDate: birthday, marriageDate: weddingday, deathDate: deathday, userId: context.user.id })
       return character;
     },
     updateChar: async (_, args) => {

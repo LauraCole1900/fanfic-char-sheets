@@ -1,3 +1,4 @@
+export { default as CharacterForm } from './characterForm';
 export { default as CharSheet } from './charSheet';
 export { default as Error } from './errorPage';
 export { default as ListPage } from './listPage';

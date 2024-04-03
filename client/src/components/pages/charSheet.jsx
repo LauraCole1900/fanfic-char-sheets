@@ -42,7 +42,7 @@ const CharSheet = () => {
             {char.father && char.mother &&
               <p><span className='bold'>Parents:</span> {char.father.firstName} {char.father.lastName} and {char.mother.firstName} {char.mother.lastName}</p>}
             {char.marriedDate &&
-              <p><span className='bold'>Married:</span> {char.marriedDate} to {char.spouse.firstName} {char.spouse.lastName}</p>
+              <p><span className='bold'>Married:</span> {char.marriedDate} to {char.spouse?.firstName} {char.spouse?.lastName}</p>
             }
             {hisKids.length > 0 &&
               <p><span className='bold'>Children:</span> {hisKids.map(kid => <span key={kid.id}>{kid.firstName} {kid.middleName}, </span>)}</p>}

@@ -5,3 +5,7 @@
 .namesList {
   list-style-type: none;
 }
+
+.red {
+  color: red;
+}

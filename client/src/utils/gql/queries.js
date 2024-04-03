@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 export const QUERY_ME = gql`
   query me {
     me {
-      _id
+      id
       email
     }
   }
@@ -50,6 +50,30 @@ query allChars {
     fandom
   }
 }
+`;
+
+export const QUERY_MEN = gql`
+  query getMen {
+    getMen(gender: "male") {
+      id
+      firstName
+      nickName
+      lastName
+      liveBirth
+    }
+  }
+`;
+
+export const QUERY_WOMEN = gql`
+  query getWomen {
+    getWomen(gender: "female") {
+      id
+      firstName
+      nickName
+      lastName
+      liveBirth
+    }
+  }
 `;
 
 export const QUERY_SINGLE_CHAR = gql`

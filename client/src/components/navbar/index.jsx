@@ -20,7 +20,7 @@ const NavBar = () => {
               <>
                 <Link to='/new_character' className='navLink'>New Character</Link>
                 {Object.keys(params).length > 0 &&
-                  <Link to={`/edit_character/${params}`} className='navLink'>Edit Character</Link>}
+                  <Link to={`/edit_character/${params.charId}`} className='navLink'>Edit Character</Link>}
                 <Nav.Link onClick={Auth.logout} className='navLink'>Logout</Nav.Link>
               </>}
           </Nav>

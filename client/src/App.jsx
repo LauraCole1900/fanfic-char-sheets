@@ -28,20 +28,7 @@ const authLink = setContext((_, { headers }) => {
 // Instantiates the client object and the cache object with some specific options
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache({
-    typePolicies: {
-      Query: {
-        fields: {
-          oneConcert: {
-            merge: true
-          },
-          addRepertoire: {
-            merge: true
-          }
-        }
-      }
-    }
-  })
+  cache: new InMemoryCache()
 });
 
 function App() {
