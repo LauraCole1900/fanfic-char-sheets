@@ -7,6 +7,9 @@ import './style.css';
 const NavBar = () => {
   const params = useParams();
 
+  const urlArr = window.location.href.split('/');
+  const isCharPage = urlArr.at(-2);
+
   return (
     <>
       <Navbar expand='sm' className='my-nav'>
@@ -19,9 +22,9 @@ const NavBar = () => {
             {Auth.loggedIn() &&
               <>
                 <Link to='/new_character' className='navLink'>New Character</Link>
-                {Object.keys(params).length > 0 &&
+                {isCharPage === 'character' &&
                   <Link to={`/edit_character/${params.charId}`} className='navLink'>Edit Character</Link>}
-                <Nav.Link onClick={Auth.logout} className='navLink'>Logout</Nav.Link>
+                <Link onClick={Auth.logout} className='navLink'>Logout</Link>
               </>}
           </Nav>
         </Navbar.Collapse>

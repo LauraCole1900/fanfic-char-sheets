@@ -1,31 +1,5 @@
 const typeDefs = `#graphql
 
-input CharacterInput {
-  userId: ID!
-  firstName: String!
-  nickName: String
-  middleName: String
-  lastName: String!
-  gender: String!
-  race: String!
-  birthDate: String!
-  marriedDate: String
-  deathDate: String
-  birthLoc: String!
-  marriedLoc: String
-  deathLoc: String
-  fatherId: ID
-  motherId: ID
-  spouseId: ID
-  milBranch: String
-  occupation: String
-  liveBirth: Boolean!
-  miscarriage: Boolean!
-  lifeNotes: String
-  deathNotes: String
-  fandomId: ID!
-}
-
 type Fandom {
   id: ID!
   fandomName: String!
@@ -73,6 +47,32 @@ type User {
 type Auth {
   token: ID!
   user: User
+}
+
+input CharacterInput {
+  userId: ID!
+  firstName: String!
+  nickName: String
+  middleName: String
+  lastName: String!
+  gender: String!
+  race: String!
+  birthDate: String!
+  marriedDate: String
+  deathDate: String
+  birthLoc: String!
+  marriedLoc: String
+  deathLoc: String
+  fatherId: ID
+  motherId: ID
+  spouseId: ID
+  milBranch: String
+  occupation: String
+  liveBirth: Boolean!
+  miscarriage: Boolean!
+  lifeNotes: String
+  deathNotes: String
+  fandomId: ID!
 }
 
 type Query {

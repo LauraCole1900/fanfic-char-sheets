@@ -36,15 +36,13 @@ const resolvers = {
       return await Fandom.findAll({});
     },
     getMen: async (_, args) => {
-      console.log(args)
-      const men = await Character.findAll({
-        where: { gender: args.gender }
+      return await Character.findAll({
+        where: { gender: args.gender, liveBirth: true }
       });
-      return men;
     },
     getWomen: async (_, args) => {
       return await Character.findAll({
-        where: { gender: args.gender }
+        where: { gender: args.gender, liveBirth: true }
       })
     },
     singleChar: async (_, args) => {

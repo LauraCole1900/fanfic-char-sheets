@@ -7,10 +7,8 @@ import Auth from '../../utils/auth';
 
 const CharacterForm = () => {
   const params = useParams();
+  // console.log(params)
 
-  const [menList, setMenList] = useState([]);
-  const [womenList, setWomenList] = useState([]);
-  const [charsList, setCharsList] = useState([]);
   const [characterData, setCharacterData] = useState({
     userId: 0,
     firstName: '',
@@ -45,7 +43,7 @@ const CharacterForm = () => {
   const { data: meData, loading: meLoading, error: meError } = useQuery(QUERY_ME);
 
   const { data: oneCharData, loading: oneCharLoading } = useQuery(QUERY_SINGLE_CHAR, {
-    variables: { charId: params.charId },
+    variables: { charId: params.charId || 0 },
   });
   const { data: allCharsData, loading: allCharsLoading, error: allCharsError } = useQuery(QUERY_ALL_CHARS);
   const { data: menData, loading: menLoading, error: menError } = useQuery(QUERY_MEN);
@@ -56,11 +54,6 @@ const CharacterForm = () => {
   const allChars = allCharsData?.allChars || [];
   const allMen = menData?.getMen || [];
   const allWomen = womenData?.getWomen || [];
-
-  const maybeDads = allMen.filter(man => man.liveBirth);
-  const maybeMoms = allWomen.filter(woman => woman.liveBirth);
-  const maybeSpouse = allChars.filter(person => person.liveBirth);
-
 
   //=====================//
   //      Mutations      //
@@ -117,7 +110,7 @@ const CharacterForm = () => {
 
     try {
       await createChar({
-        variables: { ...characterData }
+        variables: { ...characterData, userId: me.id }
       });
     } catch (error) {
       console.error(JSON.parse(JSON.stringify(error)));
@@ -194,13 +187,10 @@ const CharacterForm = () => {
   //=====================//
 
   useEffect(() => {
-    if (Object.keys(params).length > 0 && Object.keys(characterToEdit).length > 0) {
+    if (characterToEdit) {
       setCharacterData(characterToEdit);
     }
-    setMenList(maybeDads);
-    setWomenList(maybeMoms);
-    setCharsList(maybeSpouse);
-  }, [me, params, characterToEdit, maybeDads, maybeMoms, maybeSpouse]);
+  }, [])
 
 
   //=====================//
@@ -307,14 +297,14 @@ const CharacterForm = () => {
                 <Form.Label>Father:</Form.Label>
                 <Form.Select name="fatherId" value={characterData.fatherId} className="formSelect" aria-label="Father" onChange={handleInputChange}>
                   <option value='null'>N/A</option>
-                  {menList?.map(dad => <option key={dad.id} value={dad.id}>{dad.firstName} {dad.nickName} {dad.lastName}</option>)}
+                  {allMen?.map(dad => <option key={dad.id} value={dad.id}>{dad.firstName} {dad.nickName} {dad.lastName}</option>)}
                 </Form.Select>
               </Col>
               <Col sm={{ span: 4 }}>
                 <Form.Label>Mother:</Form.Label>
                 <Form.Select name="motherId" value={characterData.motherId} className="formSelect" aria-label="Father" onChange={handleInputChange}>
                   <option value='null'>N/A</option>
-                  {womenList?.map(mom => <option key={mom.id} value={mom.id}>{mom.firstName} {mom.nickName} {mom.lastName}</option>)}
+                  {allWomen?.map(mom => <option key={mom.id} value={mom.id}>{mom.firstName} {mom.nickName} {mom.lastName}</option>)}
                 </Form.Select>
               </Col>
             </Row>
@@ -326,7 +316,7 @@ const CharacterForm = () => {
                 <Form.Label>Spouse:</Form.Label>
                 <Form.Select name="spouseId" value={characterData.spouseId} className="formSelect" onChange={handleInputChange}>
                   <option value='null'>N/A</option>
-                  {charsList?.map(spouse => <option key={spouse.id} value={spouse.id}>{spouse.firstName} {spouse.nickName} {spouse.lastName}</option>)}
+                  {allChars?.map(spouse => <option key={spouse.id} value={spouse.id}>{spouse.firstName} {spouse.nickName} {spouse.lastName}</option>)}
                 </Form.Select>
               </Col>
             </Row>
