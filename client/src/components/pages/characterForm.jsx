@@ -60,6 +60,8 @@ const CharacterForm = () => {
   const allWomen = womenData?.getWomen || [];
   const allFandoms = fandomData?.allFandoms || [];
 
+  console.log({ characterToEdit });
+
   //=====================//
   //      Mutations      //
   //=====================//
@@ -155,10 +157,10 @@ const CharacterForm = () => {
   // Handles click on "Update" button
   const handleFormUpdate = async (e) => {
     e.preventDefault();
-
+    console.log({ characterData });
     try {
       await updateChar({
-        variables: { id: params.charId, character: { ...characterData } }
+        variables: { id: params.charId, ...characterData }
       });
     } catch (error) {
       console.error(JSON.parse(JSON.stringify(error)));

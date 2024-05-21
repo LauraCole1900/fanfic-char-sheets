@@ -89,10 +89,9 @@ export const CREATE_CHARACTER = gql`
 `;
 
 export const UPDATE_CHARACTER = gql`
-  updateChar($id: ID!, $character: CharacterInput!) {
+  mutation updateChar($id: ID!, $character: CharacterInput!) {
     updateChar(id: $id, character: $character) {
       id
-      character {
         userId
         firstName
         nickName
@@ -116,7 +115,6 @@ export const UPDATE_CHARACTER = gql`
         lifeNotes
         deathNotes
         fandomId
-      }
   }
 }
 `;

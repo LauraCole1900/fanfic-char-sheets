@@ -162,12 +162,14 @@ query singleChar($charId: ID!) {
       middleName
       lastName
     }
+    fatherId
     mother {
       id
       firstName
       middleName
       lastName
     }
+    motherId
     spouse {
       id
       firstName
@@ -175,6 +177,7 @@ query singleChar($charId: ID!) {
       lastName
       birthDate
     }
+    spouseId
     hisKids {
       id
       firstName

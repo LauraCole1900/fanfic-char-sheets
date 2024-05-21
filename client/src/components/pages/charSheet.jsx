@@ -36,7 +36,7 @@ const CharSheet = () => {
         <Row>
           <Col>
             {char.nickName &&
-              <p><span className='bold'>Nickname:</span> {char.nickName}</p>
+              <p><span className='bold'>Goes by:</span> {char.nickName}</p>
             }
             <p><span className='bold'>Birth:</span> {char.birthDate}, {char.birthLoc}</p>
             {char.father && char.mother &&

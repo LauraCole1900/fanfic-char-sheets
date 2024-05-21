@@ -50,6 +50,7 @@ type Auth {
 }
 
 input CharacterInput {
+  id: ID!
   userId: ID!
   firstName: String!
   nickName: String
@@ -73,6 +74,12 @@ input CharacterInput {
   lifeNotes: String
   deathNotes: String
   fandomId: ID!
+  father: CharacterInput
+  mother: CharacterInput
+  spouse: CharacterInput
+  hisKids: [CharacterInput]
+  herKids: [CharacterInput]
+  Married: CharacterInput
 }
 
 type Query {

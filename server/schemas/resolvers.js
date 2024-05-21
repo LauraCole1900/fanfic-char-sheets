@@ -27,7 +27,8 @@ const resolvers = {
     allFandomChars: async (_, args) => {
       console.log(args)
       const characters = await Character.findAll({
-        where: { fandom_id: args.fandomId }
+        where: { fandom_id: args.fandomId },
+        order: [['lastName', 'ASC'], ['birthDate', 'ASC']]
       });
       console.log(characters);
       return characters
@@ -37,17 +38,20 @@ const resolvers = {
     },
     getMen: async (_, args) => {
       return await Character.findAll({
-        where: { gender: args.gender, liveBirth: true }
+        where: { gender: args.gender, liveBirth: true },
+        order: [['lastName', 'ASC'], ['firstName', 'ASC']]
       });
     },
     getSpouses: async (_, args) => {
       return await Character.findAll({
-        where: { liveBirth: true }
+        where: { liveBirth: true },
+        order: [['lastName', 'ASC'], ['firstName', 'ASC']]
       });
     },
     getWomen: async (_, args) => {
       return await Character.findAll({
-        where: { gender: args.gender, liveBirth: true }
+        where: { gender: args.gender, liveBirth: true },
+        order: [['lastName', 'ASC'], ['firstName', 'ASC']]
       })
     },
     singleChar: async (_, args) => {
