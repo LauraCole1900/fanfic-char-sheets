@@ -34,7 +34,7 @@ export const CREATE_CHARACTER = gql`
     $miscarriage: Boolean!
     $lifeNotes: String
     $deathNotes: String
-    $fandom: [String!]!
+    $fandomId: ID!
   ) {
     createChar(
       firstName: $firstName
@@ -58,7 +58,7 @@ export const CREATE_CHARACTER = gql`
       miscarriage: $miscarriage
       lifeNotes: $lifeNotes
       deathNotes: $deathNotes
-      fandom: $fandom
+      fandomId: $fandomId
     ) {
       id
       userId
@@ -83,86 +83,40 @@ export const CREATE_CHARACTER = gql`
       miscarriage
       lifeNotes
       deathNotes
-      fandom
+      fandomId
     }
 }
 `;
 
 export const UPDATE_CHARACTER = gql`
-  mutation updateChar(
-    $id: ID!
-    $firstName: String!
-    $nickName: String
-    $middleName: String
-    $lastName: String!
-    $gender: String!
-    $race: String!
-    $birthDate: String!
-    $marriedDate: String
-    $deathDate: String
-    $birthLoc: String!
-    $marriedLoc: String
-    $deathLoc: String
-    $fatherId: ID
-    $motherId: ID
-    $spouseId: ID
-    $milBranch: String
-    $occupation: String
-    $liveBirth: Boolean!
-    $miscarriage: Boolean!
-    $lifeNotes: String
-    $deathNotes: String
-    $fandom: [String!]!
-  ) {
-    updateChar(
-      id: $id
-      firstName: $firstName
-      nickName: $nickName
-      middleName: $middleName
-      lastName: $lastName
-      gender: $gender
-      race: $race
-      birthDate: $birthDate
-      marriedDate: $marriedDate
-      deathDate: $deathDate
-      birthLoc: $birthLoc
-      marriedLoc: $marriedLoc
-      deathLoc: $deathLoc
-      fatherId: $fatherId
-      motherId: $motherId
-      spouseId: $spouseId
-      milBranch: $milBranch
-      occupation: $occupation
-      liveBirth: $liveBirth
-      miscarriage: $miscarriage
-      lifeNotes: $lifeNotes
-      deathNotes: $deathNotes
-      fandom: $fandom
-    ) {
+  updateChar($id: ID!, $character: CharacterInput!) {
+    updateChar(id: $id, character: $character) {
       id
-      userId
-      firstName
-      nickName
-      middleName
-      lastName
-      gender
-      race
-      birthDate
-      marriedDate
-      deathDate
-      birthLoc
-      marriedLoc
-      deathLoc
-      fatherId
-      motherId
-      spouseId
-      milBranch
-      occupation
-      liveBirth
-      miscarriage
-      lifeNotes
-      deathNotes
-      fandom
-    }
+      character {
+        userId
+        firstName
+        nickName
+        middleName
+        lastName
+        gender
+        race
+        birthDate
+        marriedDate
+        deathDate
+        birthLoc
+        marriedLoc
+        deathLoc
+        fatherId
+        motherId
+        spouseId
+        milBranch
+        occupation
+        liveBirth
+        miscarriage
+        lifeNotes
+        deathNotes
+        fandomId
+      }
+  }
 }
 `;

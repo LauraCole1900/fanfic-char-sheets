@@ -105,8 +105,8 @@ export const QUERY_ALL_FANDOMS = gql`
 `;
 
 export const QUERY_MEN = gql`
-  query getMen {
-    getMen(gender: "male") {
+  query getMen($gender: String!) {
+    getMen(gender: $gender) {
       id
       firstName
       nickName
@@ -116,9 +116,20 @@ export const QUERY_MEN = gql`
   }
 `;
 
+export const QUERY_SPOUSES = gql`
+  query getSpouses {
+    getSpouses {
+      id
+      firstName
+      nickName
+      lastName
+    }
+  }
+`;
+
 export const QUERY_WOMEN = gql`
-  query getWomen {
-    getWomen(gender: "female") {
+  query getWomen($gender: String!) {
+    getWomen(gender: $gender) {
       id
       firstName
       nickName

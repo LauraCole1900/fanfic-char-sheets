@@ -40,6 +40,11 @@ const resolvers = {
         where: { gender: args.gender, liveBirth: true }
       });
     },
+    getSpouses: async (_, args) => {
+      return await Character.findAll({
+        where: { liveBirth: true }
+      });
+    },
     getWomen: async (_, args) => {
       return await Character.findAll({
         where: { gender: args.gender, liveBirth: true }
@@ -79,6 +84,7 @@ const resolvers = {
       return { token, user };
     },
     createChar: async (_, args, context) => {
+      console.log({ args });
       const birthday = dayjs(args.birthDate);
       const weddingday = dayjs(args.marriageDate);
       const deathday = dayjs(args.deathDate);
@@ -86,8 +92,12 @@ const resolvers = {
       return character;
     },
     updateChar: async (_, args) => {
+      console.log({ args })
+      const birthday = dayjs(args.birthDate);
+      const weddingday = dayjs(args.marriageDate);
+      const deathday = dayjs(args.deathDate);
       const updatedChar = Character.update(
-        { ...args },
+        { ...args.character, birthDate: birthday, marriageDate: weddingday, deathDate: deathday },
         {
           where: {
             id: args.id

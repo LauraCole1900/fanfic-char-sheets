@@ -12,11 +12,10 @@ const ListPage = () => {
     variables: { fandomId: params.fandomId }
   });
   const chars = data?.allFandomChars || []
-  console.log(chars)
 
   useEffect(() => {
     if (data) {
-      setCharacters(data?.allFandomChars);
+      setCharacters(chars);
     }
   }, [data]);
 
