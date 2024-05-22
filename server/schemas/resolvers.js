@@ -25,12 +25,10 @@ const resolvers = {
       return await Character.findAll({});
     },
     allFandomChars: async (_, args) => {
-      console.log(args)
       const characters = await Character.findAll({
         where: { fandom_id: args.fandomId },
         order: [['lastName', 'ASC'], ['birthDate', 'ASC']]
       });
-      console.log(characters);
       return characters
     },
     allFandoms: async () => {
@@ -88,20 +86,13 @@ const resolvers = {
       return { token, user };
     },
     createChar: async (_, args, context) => {
-      console.log({ args });
-      const birthday = dayjs(args.birthDate);
-      const weddingday = dayjs(args.marriageDate);
-      const deathday = dayjs(args.deathDate);
-      const character = await Character.create({ ...args, birthDate: birthday, marriageDate: weddingday, deathDate: deathday, userId: context.user.id })
+      const character = await Character.create({ ...args.character });
       return character;
     },
     updateChar: async (_, args) => {
       console.log({ args })
-      const birthday = dayjs(args.birthDate);
-      const weddingday = dayjs(args.marriageDate);
-      const deathday = dayjs(args.deathDate);
       const updatedChar = Character.update(
-        { ...args.character, birthDate: birthday, marriageDate: weddingday, deathDate: deathday },
+        { ...args.character },
         {
           where: {
             id: args.id

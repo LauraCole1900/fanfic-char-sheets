@@ -33,6 +33,9 @@ Character.init(
       type: DataTypes.STRING,
       allowNull: false
     },
+    suffix: {
+      type: DataTypes.STRING
+    },
     gender: {
       type: DataTypes.STRING,
       allowNull: false

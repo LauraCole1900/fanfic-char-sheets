@@ -31,7 +31,7 @@ const ListPage = () => {
     <>
       <ul className='namesList'>
         {characters.map(character => (
-          <li key={character.id}><Link to={`/character/${character.id}`}>{character.firstName} {character.lastName}</Link></li>
+          <li key={character.id}><Link to={`/character/${character.id}`}>{character.firstName} {character.lastName} {character.suffix}</Link></li>
         ))}
       </ul>
     </>

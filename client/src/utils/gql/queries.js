@@ -18,6 +18,7 @@ query allChars {
     nickName
     middleName
     lastName
+    suffix
     gender
     race
     birthDate
@@ -61,6 +62,7 @@ query allFandomChars($fandomId: ID!) {
     nickName
     middleName
     lastName
+    suffix
     gender
     race
     birthDate
@@ -111,6 +113,7 @@ export const QUERY_MEN = gql`
       firstName
       nickName
       lastName
+      suffix
       liveBirth
     }
   }
@@ -123,6 +126,7 @@ export const QUERY_SPOUSES = gql`
       firstName
       nickName
       lastName
+      suffix
     }
   }
 `;
@@ -134,6 +138,7 @@ export const QUERY_WOMEN = gql`
       firstName
       nickName
       lastName
+      suffix
       liveBirth
     }
   }
@@ -148,6 +153,7 @@ query singleChar($charId: ID!) {
     nickName
     middleName
     lastName
+    suffix
     gender
     race
     birthDate

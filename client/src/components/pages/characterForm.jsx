@@ -14,11 +14,12 @@ const CharacterForm = () => {
     nickName: '',
     middleName: '',
     lastName: '',
+    suffix: '',
     gender: '',
     race: '',
     birthDate: '',
-    marriedDate: '',
-    deathDate: '',
+    marriedDate: null,
+    deathDate: null,
     birthLoc: '',
     marriedLoc: '',
     deathLoc: '',
@@ -60,7 +61,6 @@ const CharacterForm = () => {
   const allWomen = womenData?.getWomen || [];
   const allFandoms = fandomData?.allFandoms || [];
 
-  console.log({ characterToEdit });
 
   //=====================//
   //      Mutations      //
@@ -72,19 +72,38 @@ const CharacterForm = () => {
         // Retrieve existing post data that is stored in the cache
         const allData = cache.readQuery({ query: QUERY_ALL_CHARS });
         const currentChars = allData.allChars;
+        console.log({ currentChars });
         // Update the cache by combining existing post data with the newly created data returned from the mutation
         cache.writeQuery({
           query: QUERY_ALL_CHARS,
           // If we want new data to show up before or after existing data, adjust the order of this array
           data: { allChars: [...currentChars, createChar] },
         });
+        console.log({ cache });
       } catch (err) {
-        console.error(JSON.parse(JSON.stringify(err)));
+        console.error('error', JSON.parse(JSON.stringify(err)));
       }
     }
   });
 
-  const [updateChar] = useMutation(UPDATE_CHARACTER);
+  const [updateChar] = useMutation(UPDATE_CHARACTER, {
+    update(cache, { data: { updateChar } }) {
+      try {
+        // Retrieve existing post data that is stored in the cache
+        const allData = cache.readQuery({ query: QUERY_ALL_CHARS });
+        const currentChars = allData.allChars;
+        // Update the cache by combining existing post data with the newly created data returned from the mutation
+        cache.writeQuery({
+          query: QUERY_ALL_CHARS,
+          // If we want new data to show up before or after existing data, adjust the order of this array
+          data: { allChars: [...currentChars, updateChar] },
+        });
+        console.log({ cache });
+      } catch (err) {
+        console.error('error', JSON.parse(JSON.stringify(err)));
+      }
+    }
+  });
 
 
   //=====================//
@@ -122,36 +141,12 @@ const CharacterForm = () => {
 
     try {
       await createChar({
-        variables: { ...newCharacter, userId: me.id }
+        variables: { character: { ...newCharacter, userId: me.id } }
       });
+      <Navigate to={`/characters/${characterData.fandomId}`} />
     } catch (error) {
       console.error(JSON.parse(JSON.stringify(error)));
     }
-    setCharacterData({
-      userId: 0,
-      firstName: '',
-      nickName: '',
-      middleName: '',
-      lastName: '',
-      gender: '',
-      race: '',
-      birthDate: '',
-      marriedDate: '',
-      deathDate: '',
-      birthLoc: '',
-      marriedLoc: '',
-      deathLoc: '',
-      fatherId: null,
-      motherId: null,
-      spouseId: null,
-      milBranch: '',
-      occupation: '',
-      liveBirth: true,
-      miscarriage: false,
-      lifeNotes: '',
-      deathNotes: '',
-      fandomId: 0
-    });
   };
 
   // Handles click on "Update" button
@@ -162,34 +157,35 @@ const CharacterForm = () => {
       await updateChar({
         variables: { id: params.charId, character: { ...characterData } }
       });
+      setCharacterData({
+        userId: 0,
+        firstName: '',
+        nickName: '',
+        middleName: '',
+        lastName: '',
+        suffix: '',
+        gender: '',
+        race: '',
+        birthDate: '',
+        marriedDate: '',
+        deathDate: '',
+        birthLoc: '',
+        marriedLoc: '',
+        deathLoc: '',
+        fatherId: null,
+        motherId: null,
+        spouseId: null,
+        milBranch: '',
+        occupation: '',
+        liveBirth: true,
+        miscarriage: false,
+        lifeNotes: '',
+        deathNotes: '',
+        fandomId: 0
+      });
     } catch (error) {
       console.error(JSON.parse(JSON.stringify(error)));
     }
-    setCharacterData({
-      userId: 0,
-      firstName: '',
-      nickName: '',
-      middleName: '',
-      lastName: '',
-      gender: '',
-      race: '',
-      birthDate: '',
-      marriedDate: '',
-      deathDate: '',
-      birthLoc: '',
-      marriedLoc: '',
-      deathLoc: '',
-      fatherId: null,
-      motherId: null,
-      spouseId: null,
-      milBranch: '',
-      occupation: '',
-      liveBirth: true,
-      miscarriage: false,
-      lifeNotes: '',
-      deathNotes: '',
-      fandomId: 0
-    });
   };
 
 
@@ -238,33 +234,55 @@ const CharacterForm = () => {
               <Col sm={{ span: 8, offset: 2 }}>
                 <Form.Label>Character name: <span className="red">*</span></Form.Label>
                 <Form.Control type="input" name="firstName" placeholder="First name" value={characterData.firstName} className="formInput" onChange={handleInputChange} />
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={{ span: 8, offset: 2 }}>
                 <Form.Control type="input" name="middleName" placeholder="Middle name(s)" value={characterData.middleName} className="formInput" onChange={handleInputChange} />
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={{ span: 6, offset: 2 }}>
                 <Form.Control type="input" name="lastName" placeholder="Last name" value={characterData.lastName} className="formInput" onChange={handleInputChange} />
+              </Col>
+              <Col sm={{ span: 2 }}>
+                <Form.Select name="suffix" value={characterData.suffix} className="formSelect" onChange={handleInputChange}>
+                  <option value="">none</option>
+                  <option value="III">III</option>
+                  <option value="IV">IV</option>
+                  <option value="V">V</option>
+                  <option value="VI">VI</option>
+                  <option value="VII">VII</option>
+                  <option value="VIII">VIII</option>
+                </Form.Select>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={{ span: 8, offset: 2 }}>
                 <Form.Control type="input" name="nickName" placeholder="Nickname" value={characterData.nickName} className="formInput" onChange={handleInputChange} />
               </Col>
             </Row>
           </Form.Group>
 
-          <Row>
-            <Form.Group controlId="formCharGender">
+          <Form.Group controlId="formCharGenderRace">
+            <Row>
               <Col sm={{ span: 4, offset: 2 }}>
                 <Form.Label>Gender: <span className="red">*</span></Form.Label>
                 <Form.Control type="input" name="gender" placeholder="Gender" value={characterData.gender} className="formInput" onChange={handleInputChange} />
               </Col>
-            </Form.Group>
-            <Form.Group controlId="formCharRace">
+
               <Col sm={{ span: 4 }}>
                 <Form.Label>Ethnicity: <span className="red">*</span></Form.Label>
                 <Form.Control type="input" name="race" placeholder="Ethnicity" value={characterData.race} className="formInput" onChange={handleInputChange} />
               </Col>
-            </Form.Group>
-          </Row>
+            </Row>
+          </Form.Group>
 
           <Form.Group controlId="formCharBirth">
             <Row>
               <Col sm={{ span: 4, offset: 2 }}>
                 <Form.Label>Date of birth: <span className="red">*</span></Form.Label>
-                <Form.Control type="input" name="birthDate" placeholder="Date of birth" value={characterData.birthDate} className="formInput" onChange={handleInputChange} />
+                <Form.Control type="input" name="birthDate" placeholder="yyyy-mm-dd" value={characterData.birthDate} className="formInput" onChange={handleInputChange} />
               </Col>
 
               <Col sm={{ span: 4 }}>
@@ -278,7 +296,7 @@ const CharacterForm = () => {
             <Row>
               <Col sm={{ span: 4, offset: 2 }}>
                 <Form.Label>Date of marriage:</Form.Label>
-                <Form.Control type="input" name="marriedDate" placeholder="Date of marriage" value={characterData.marriedDate} className="formInput" onChange={handleInputChange} />
+                <Form.Control type="input" name="marriedDate" placeholder="yyyy-mm-dd" value={characterData.marriedDate} className="formInput" onChange={handleInputChange} />
               </Col>
 
               <Col sm={{ span: 4 }}>
@@ -292,7 +310,7 @@ const CharacterForm = () => {
             <Row>
               <Col sm={{ span: 4, offset: 2 }}>
                 <Form.Label>Date of death:</Form.Label>
-                <Form.Control type="input" name="deathDate" placeholder="Date of death" value={characterData.deathDate} className="formInput" onChange={handleInputChange} />
+                <Form.Control type="input" name="deathDate" placeholder="yyyy-mm-dd" value={characterData.deathDate} className="formInput" onChange={handleInputChange} />
               </Col>
 
               <Col sm={{ span: 4 }}>

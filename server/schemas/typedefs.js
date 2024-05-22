@@ -12,6 +12,7 @@ type Character {
   nickName: String
   middleName: String
   lastName: String!
+  suffix: String
   gender: String!
   race: String!
   birthDate: String!
@@ -49,13 +50,14 @@ type Auth {
   user: User
 }
 
-input CharacterInput {
-  id: ID!
+input CreateCharacterInput {
+  id: ID
   userId: ID
   firstName: String!
   nickName: String
   middleName: String
   lastName: String!
+  suffix: String
   gender: String
   race: String
   birthDate: String
@@ -74,12 +76,46 @@ input CharacterInput {
   lifeNotes: String
   deathNotes: String
   fandomId: ID
-  father: CharacterInput
-  mother: CharacterInput
-  spouse: CharacterInput
-  hisKids: [CharacterInput]
-  herKids: [CharacterInput]
-  Married: CharacterInput
+  father: CreateCharacterInput
+  mother: CreateCharacterInput
+  spouse: CreateCharacterInput
+  hisKids: [CreateCharacterInput]
+  herKids: [CreateCharacterInput]
+  Married: CreateCharacterInput
+}
+
+input UpdateCharacterInput {
+  id: ID!
+  userId: ID
+  firstName: String!
+  nickName: String
+  middleName: String
+  lastName: String!
+  suffix: String
+  gender: String
+  race: String
+  birthDate: String
+  marriedDate: String
+  deathDate: String
+  birthLoc: String
+  marriedLoc: String
+  deathLoc: String
+  fatherId: ID
+  motherId: ID
+  spouseId: ID
+  milBranch: String
+  occupation: String
+  liveBirth: Boolean
+  miscarriage: Boolean
+  lifeNotes: String
+  deathNotes: String
+  fandomId: ID
+  father: UpdateCharacterInput
+  mother: UpdateCharacterInput
+  spouse: UpdateCharacterInput
+  hisKids: [UpdateCharacterInput]
+  herKids: [UpdateCharacterInput]
+  Married: UpdateCharacterInput
 }
 
 type Query {
@@ -95,8 +131,8 @@ type Query {
 
 type Mutation {
   login(email: String!, password: String!): Auth
-  createChar(firstName: String!, nickName: String, middleName: String, lastName: String!, gender: String!, race: String!, birthDate: String!, marriedDate: String, deathDate: String, birthLoc: String!, marriedLoc: String, deathLoc: String, fatherId: ID, motherId: ID, spouseId: ID, milBranch: String, occupation: String, liveBirth: Boolean!, miscarriage: Boolean!, lifeNotes: String, deathNotes: String, fandomId: ID!): Character
-  updateChar(id: ID!, character: CharacterInput!): Character
+  createChar(character: CreateCharacterInput!): Character
+  updateChar(id: ID!, character: UpdateCharacterInput!): Character
   deleteChar(id: ID!): Character
 }
 `;
