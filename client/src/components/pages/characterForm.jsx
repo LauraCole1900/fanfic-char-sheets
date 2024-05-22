@@ -68,15 +68,17 @@ const CharacterForm = () => {
   //=====================//
 
   const [createChar] = useMutation(CREATE_CHARACTER, {
-    update(cache, { data: { createChar } }) {
+    async update(cache, { data: { createChar } }) {
       console.log({ cache });
       try {
         // Retrieve existing character data that is stored in the cache
-        const allData = cache.readQuery({
+        const allData = await cache.readQuery({
           query: QUERY_FANDOM_CHARS,
           variables: { fandomId: createChar.fandomId }
         });
-        const currentChars = allData.allFandomChars;
+        const currentChars = allData?.allFandomChars;
+        console.log({ currentChars });
+        console.log({ createChar });
         // Update the cache by combining existing character data with the newly created data returned from the mutation
         cache.writeQuery({
           query: QUERY_FANDOM_CHARS,
@@ -91,17 +93,8 @@ const CharacterForm = () => {
 
   const [updateChar] = useMutation(UPDATE_CHARACTER, {
     async update(cache, { data: { updateChar } }) {
-      console.log({ cache });
       try {
-        // Retrieve existing post data that is stored in the cache
-        const charData = await cache.readQuery({
-          query: QUERY_SINGLE_CHAR,
-          variables: { id: params.charId }
-        });
-        console.log({ charData });
-        const currentChar = charData?.singleChar;
-        console.log({ currentChar })
-        // Update the cache by combining existing post data with the newly created data returned from the mutation
+        // Update the cache by combining finding the character in the cache with the appropriate ID and replacing it with the newly created data returned from the mutation
         cache.writeQuery({
           query: QUERY_SINGLE_CHAR,
           variables: { id: params.charId },
