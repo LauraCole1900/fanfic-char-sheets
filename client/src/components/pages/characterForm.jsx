@@ -160,7 +160,7 @@ const CharacterForm = () => {
     console.log({ characterData });
     try {
       await updateChar({
-        variables: { id: params.charId, ...characterData }
+        variables: { id: params.charId, character: { ...characterData } }
       });
     } catch (error) {
       console.error(JSON.parse(JSON.stringify(error)));

@@ -51,17 +51,17 @@ type Auth {
 
 input CharacterInput {
   id: ID!
-  userId: ID!
+  userId: ID
   firstName: String!
   nickName: String
   middleName: String
   lastName: String!
-  gender: String!
-  race: String!
-  birthDate: String!
+  gender: String
+  race: String
+  birthDate: String
   marriedDate: String
   deathDate: String
-  birthLoc: String!
+  birthLoc: String
   marriedLoc: String
   deathLoc: String
   fatherId: ID
@@ -69,11 +69,11 @@ input CharacterInput {
   spouseId: ID
   milBranch: String
   occupation: String
-  liveBirth: Boolean!
-  miscarriage: Boolean!
+  liveBirth: Boolean
+  miscarriage: Boolean
   lifeNotes: String
   deathNotes: String
-  fandomId: ID!
+  fandomId: ID
   father: CharacterInput
   mother: CharacterInput
   spouse: CharacterInput
