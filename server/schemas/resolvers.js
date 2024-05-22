@@ -90,14 +90,15 @@ const resolvers = {
       return character;
     },
     updateChar: async (_, args) => {
-      console.log({ args })
-      const updatedChar = Character.update(
+      const updatedChar = await Character.update(
         { ...args.character },
         {
           where: {
             id: args.id
-          }
+          },
+          returning: true
         });
+      console.log(updatedChar[1]);
       return updatedChar;
     },
     deleteChar: async (_, args) => {

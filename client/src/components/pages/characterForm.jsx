@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { QUERY_ME, QUERY_ALL_CHARS, QUERY_ALL_FANDOMS, QUERY_MEN, QUERY_SPOUSES, QUERY_WOMEN, QUERY_SINGLE_CHAR, CREATE_CHARACTER, UPDATE_CHARACTER } from '../../utils/gql';
+import { QUERY_ME, QUERY_FANDOM_CHARS, QUERY_ALL_FANDOMS, QUERY_MEN, QUERY_SPOUSES, QUERY_WOMEN, QUERY_SINGLE_CHAR, CREATE_CHARACTER, UPDATE_CHARACTER } from '../../utils/gql';
 import Auth from '../../utils/auth';
 
 const CharacterForm = () => {
@@ -68,18 +68,20 @@ const CharacterForm = () => {
 
   const [createChar] = useMutation(CREATE_CHARACTER, {
     update(cache, { data: { createChar } }) {
+      console.log({ cache });
       try {
-        // Retrieve existing post data that is stored in the cache
-        const allData = cache.readQuery({ query: QUERY_ALL_CHARS });
-        const currentChars = allData.allChars;
-        console.log({ currentChars });
-        // Update the cache by combining existing post data with the newly created data returned from the mutation
-        cache.writeQuery({
-          query: QUERY_ALL_CHARS,
-          // If we want new data to show up before or after existing data, adjust the order of this array
-          data: { allChars: [...currentChars, createChar] },
+        // Retrieve existing character data that is stored in the cache
+        const allData = cache.readQuery({
+          query: QUERY_FANDOM_CHARS,
+          variables: { fandomId: createChar.fandomId }
         });
-        console.log({ cache });
+        const currentChars = allData.allFandomChars;
+        // Update the cache by combining existing character data with the newly created data returned from the mutation
+        cache.writeQuery({
+          query: QUERY_FANDOM_CHARS,
+          // If we want new data to show up before or after existing data, adjust the order of this array
+          data: { allFandomChars: [...currentChars, createChar] },
+        });
       } catch (err) {
         console.error('error', JSON.parse(JSON.stringify(err)));
       }
@@ -88,15 +90,21 @@ const CharacterForm = () => {
 
   const [updateChar] = useMutation(UPDATE_CHARACTER, {
     update(cache, { data: { updateChar } }) {
+      console.log({ cache });
       try {
         // Retrieve existing post data that is stored in the cache
-        const allData = cache.readQuery({ query: QUERY_ALL_CHARS });
-        const currentChars = allData.allChars;
+        const charData = cache.readQuery({
+          query: QUERY_SINGLE_CHAR,
+          variables: { id: params.charId }
+        });
+        const currentChar = charData.singleChar;
+        console.log({ currentChar })
         // Update the cache by combining existing post data with the newly created data returned from the mutation
         cache.writeQuery({
-          query: QUERY_ALL_CHARS,
+          query: QUERY_SINGLE_CHAR,
+          variables: { id: params.charId },
           // If we want new data to show up before or after existing data, adjust the order of this array
-          data: { allChars: [...currentChars, updateChar] },
+          data: { singleChar: { ...updateChar } },
         });
         console.log({ cache });
       } catch (err) {
@@ -152,11 +160,11 @@ const CharacterForm = () => {
   // Handles click on "Update" button
   const handleFormUpdate = async (e) => {
     e.preventDefault();
-    console.log({ characterData });
     try {
-      await updateChar({
+      const { data } = await updateChar({
         variables: { id: params.charId, character: { ...characterData } }
       });
+      console.log({ data });
       setCharacterData({
         userId: 0,
         firstName: '',
