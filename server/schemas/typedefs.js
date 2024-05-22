@@ -53,10 +53,10 @@ type Auth {
 input CreateCharacterInput {
   id: ID
   userId: ID
-  firstName: String!
+  firstName: String
   nickName: String
   middleName: String
-  lastName: String!
+  lastName: String
   suffix: String
   gender: String
   race: String
@@ -87,10 +87,10 @@ input CreateCharacterInput {
 input UpdateCharacterInput {
   id: ID!
   userId: ID
-  firstName: String!
+  firstName: String
   nickName: String
   middleName: String
-  lastName: String!
+  lastName: String
   suffix: String
   gender: String
   race: String

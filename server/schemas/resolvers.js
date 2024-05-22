@@ -98,8 +98,8 @@ const resolvers = {
           },
           returning: true
         });
-      console.log(updatedChar[1]);
-      return updatedChar;
+      const charUpdate = { ...updatedChar[1][0].dataValues, userId: updatedChar[1][0].dataValues.user_id, fandomId: updatedChar[1][0].dataValues.fandom_id }
+      return charUpdate;
     },
     deleteChar: async (_, args) => {
       const deletedChar = Character.destroy({ where: { id: args.id } });

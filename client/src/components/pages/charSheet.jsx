@@ -30,20 +30,19 @@ const CharSheet = () => {
       <Container fluid>
         <Row>
           <Col>
-            <h1>{char.firstName} {char.middleName} {char.lastName}</h1>
+            <h1>{char.firstName} {char.middleName} {char.lastName} {char.suffix}</h1>
           </Col>
         </Row>
         <Row>
           <Col>
-            {char.nickName &&
-              <p><span className='bold'>Goes by:</span> {char.nickName}</p>
-            }
+            <p><span className='bold'>Goes by:</span> {char.nickName}</p>
             <p><span className='bold'>Birth:</span> {char.birthDate}, {char.birthLoc}</p>
             {char.father && char.mother &&
               <p><span className='bold'>Parents:</span> {char.father.firstName} {char.father.lastName} and {char.mother.firstName} {char.mother.lastName}</p>}
             {char.marriedDate &&
               <p><span className='bold'>Married:</span> {char.marriedDate} to {char.spouse?.firstName} {char.spouse?.lastName}</p>
             }
+            <p><span className='bold'>Life notes:</span> {char.lifeNotes}</p>
             {hisKids.length > 0 &&
               <>
                 <p className='bold'>Children:</p>

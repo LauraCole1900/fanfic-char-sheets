@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { QUERY_ME, QUERY_FANDOM_CHARS, QUERY_ALL_FANDOMS, QUERY_MEN, QUERY_SPOUSES, QUERY_WOMEN, QUERY_SINGLE_CHAR, CREATE_CHARACTER, UPDATE_CHARACTER } from '../../utils/gql';
@@ -7,6 +7,7 @@ import Auth from '../../utils/auth';
 
 const CharacterForm = () => {
   const params = useParams();
+  const navigate = useNavigate();
 
   const [characterData, setCharacterData] = useState({
     userId: 0,
@@ -89,15 +90,16 @@ const CharacterForm = () => {
   });
 
   const [updateChar] = useMutation(UPDATE_CHARACTER, {
-    update(cache, { data: { updateChar } }) {
+    async update(cache, { data: { updateChar } }) {
       console.log({ cache });
       try {
         // Retrieve existing post data that is stored in the cache
-        const charData = cache.readQuery({
+        const charData = await cache.readQuery({
           query: QUERY_SINGLE_CHAR,
           variables: { id: params.charId }
         });
-        const currentChar = charData.singleChar;
+        console.log({ charData });
+        const currentChar = charData?.singleChar;
         console.log({ currentChar })
         // Update the cache by combining existing post data with the newly created data returned from the mutation
         cache.writeQuery({
@@ -151,7 +153,7 @@ const CharacterForm = () => {
       await createChar({
         variables: { character: { ...newCharacter, userId: me.id } }
       });
-      <Navigate to={`/characters/${characterData.fandomId}`} />
+      navigate(`/characters/${characterData.fandomId}`, { replace: true })
     } catch (error) {
       console.error(JSON.parse(JSON.stringify(error)));
     }
@@ -161,36 +163,10 @@ const CharacterForm = () => {
   const handleFormUpdate = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await updateChar({
+      await updateChar({
         variables: { id: params.charId, character: { ...characterData } }
       });
-      console.log({ data });
-      setCharacterData({
-        userId: 0,
-        firstName: '',
-        nickName: '',
-        middleName: '',
-        lastName: '',
-        suffix: '',
-        gender: '',
-        race: '',
-        birthDate: '',
-        marriedDate: '',
-        deathDate: '',
-        birthLoc: '',
-        marriedLoc: '',
-        deathLoc: '',
-        fatherId: null,
-        motherId: null,
-        spouseId: null,
-        milBranch: '',
-        occupation: '',
-        liveBirth: true,
-        miscarriage: false,
-        lifeNotes: '',
-        deathNotes: '',
-        fandomId: 0
-      });
+      navigate(`/character/${characterData.id}`, { replace: true })
     } catch (error) {
       console.error(JSON.parse(JSON.stringify(error)));
     }
@@ -256,6 +232,9 @@ const CharacterForm = () => {
               <Col sm={{ span: 2 }}>
                 <Form.Select name="suffix" value={characterData.suffix} className="formSelect" onChange={handleInputChange}>
                   <option value="">none</option>
+                  <option value="Sr.">Sr.</option>
+                  <option value="Jr.">Jr.</option>
+                  <option value="II">II</option>
                   <option value="III">III</option>
                   <option value="IV">IV</option>
                   <option value="V">V</option>
