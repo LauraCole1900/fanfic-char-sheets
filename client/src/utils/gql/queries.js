@@ -197,6 +197,7 @@ query singleChar($charId: ID!) {
       firstName
       middleName
       lastName
+      suffix
     }
     fatherId
     mother {
@@ -204,6 +205,7 @@ query singleChar($charId: ID!) {
       firstName
       middleName
       lastName
+      suffix
     }
     motherId
     spouse {
@@ -212,12 +214,14 @@ query singleChar($charId: ID!) {
       middleName
       lastName
       birthDate
+      suffix
     }
     spouseId
     hisKids {
       id
       firstName
       middleName
+      suffix
       liveBirth
       miscarriage
     }
@@ -225,6 +229,7 @@ query singleChar($charId: ID!) {
       id
       firstName
       middleName
+      suffix
       liveBirth
       miscarriage
     }
@@ -233,6 +238,7 @@ query singleChar($charId: ID!) {
       firstName
       middleName
       lastName
+      suffix
     }
     milBranch
     occupation

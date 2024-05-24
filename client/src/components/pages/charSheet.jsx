@@ -1,7 +1,8 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { Container, Col, Row } from 'react-bootstrap';
 import { QUERY_FULL_SIBS, QUERY_HALF_SIBS, QUERY_SINGLE_CHAR } from '../../utils/gql';
+import Auth from '../../utils/auth';
 import './style.css';
 
 const CharSheet = () => {
@@ -35,6 +36,10 @@ const CharSheet = () => {
     return <h1>Character not found!</h1>
   }
 
+  if (!Auth.loggedIn()) {
+    return <Navigate to='/login' />
+  }
+
   return (
     <>
       <Container fluid>
@@ -51,6 +56,9 @@ const CharSheet = () => {
               <p><span className='bold'>Parents:</span> {char.father.firstName} {char.father.lastName} and {char.mother.firstName} {char.mother.lastName}</p>}
             {char.marriedDate &&
               <p><span className='bold'>Married:</span> {char.marriedDate} to {char.spouse?.firstName} {char.spouse?.lastName}</p>
+            }
+            {char.deathDate &&
+              <p><span className='bold'>Died:</span> {char.deathDate}</p>
             }
             {fullSibs.length > 0 &&
               <>
@@ -71,14 +79,14 @@ const CharSheet = () => {
               <>
                 <p className='bold'>Children:</p>
                 <ul>
-                  {hisKids.map(kid => <li key={kid.id}>{kid.firstName} {kid.middleName}</li>)}
+                {hisKids.map(kid => <li key={kid.id}><Link to={`/character/${kid.fandomId}/${kid.id}`}>{kid.firstName} {kid.middleName} {kid.suffix}</Link></li>)}
                 </ul>
               </>}
             {herKids.length > 0 &&
               <>
                 <p className='bold'>Children:</p>
                 <ul>
-                  {herKids.map(kid => <li key={kid.id}>{kid.firstName} {kid.middleName}</li>)}
+                {herKids.map(kid => <li key={kid.id}><Link to={`/character/${kid.fandomId}/${kid.id}`}>{kid.firstName} {kid.middleName} {kid.suffix}</Link></li>)}
                 </ul>
               </>}
           </Col>

@@ -47,10 +47,11 @@ const resolvers = {
       const siblings = await Character.findAll({
         where: {
           fatherId: currChar.fatherId,
+          fatherId: { [Op.ne]: null },
           motherId: currChar.motherId,
           liveBirth: true,
           [Op.not]: {
-            id: currChar.id
+            id: currChar.id,
           }
         },
         order: [['birthDate', 'ASC']]
@@ -162,14 +163,16 @@ const resolvers = {
       return Character.findAll({
         where: {
           fatherId: character.id
-        }
+        },
+        order: [['birthDate', 'ASC']]
       });
     },
     herKids: async (character, _) => {
       return Character.findAll({
         where: {
           motherId: character.id
-        }
+        },
+        order: [['birthDate', 'ASC']]
       });
     },
     spouse: async (character, _) => {
