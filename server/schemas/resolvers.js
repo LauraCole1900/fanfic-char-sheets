@@ -26,7 +26,10 @@ const resolvers = {
     },
     allFandomChars: async (_, args) => {
       const characters = await Character.findAll({
-        where: { fandom_id: args.fandomId },
+        where: {
+          fandom_id: args.fandomId,
+          liveBirth: true
+        },
         order: [['lastName', 'ASC'], ['birthDate', 'ASC']]
       });
       return characters

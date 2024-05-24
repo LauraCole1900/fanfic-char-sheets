@@ -11,7 +11,6 @@ const ListPage = () => {
 
   const { error: meError, loading: meLoading, data: meData } = useQuery(QUERY_ME);
   const me = useMemo(() => { return meData?.me || meData?.currentId || {} }, [meData?.me, meData?.currentId]);
-  console.log({ me });
 
   const { error, loading, data } = useQuery(QUERY_FANDOM_CHARS, {
     variables: { fandomId: params.fandomId, userId: me?.id }
