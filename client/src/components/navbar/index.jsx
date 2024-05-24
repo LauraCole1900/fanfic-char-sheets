@@ -8,7 +8,7 @@ const NavBar = () => {
   const params = useParams();
 
   const urlArr = window.location.href.split('/');
-  const isCharPage = urlArr.at(-2);
+  const isCharPage = urlArr.at(-3);
 
   return (
     <>
@@ -23,7 +23,10 @@ const NavBar = () => {
               <>
                 <Link to='/new_character' className='navLink'>New Character</Link>
                 {isCharPage === 'character' &&
-                  <Link to={`/edit_character/${params.charId}`} className='navLink'>Edit Character</Link>}
+                  <>
+                    <Link to={`/characters/${params.fandomId}`} className='navLink'>Character list</Link>
+                    <Link to={`/edit_character/${params.charId}`} className='navLink'>Edit Character</Link>
+                  </>}
                 <Link onClick={Auth.logout} className='navLink'>Logout</Link>
               </>}
           </Nav>

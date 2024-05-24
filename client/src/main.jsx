@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         element: <ListPage />
       },
       {
-        path: '/character/:charId',
+        path: '/character/:fandomId/:charId',
         element: <CharSheet />
       },
       {
