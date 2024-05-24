@@ -1,5 +1,5 @@
 const { GraphQLError } = require('graphql');
-const dayjs = require('dayjs');
+const { Op } = require('@sequelize/core');
 const { Character, Fandom, Fans, User } = require('../models/index.js');
 const auth = require('../utils/auth.js');
 
@@ -40,7 +40,24 @@ const resolvers = {
         order: [['lastName', 'ASC'], ['firstName', 'ASC']]
       });
     },
-    getSpouses: async (_, args) => {
+    getFullSiblings: async (_, args) => {
+      const currChar = await Character.findOne({
+        where: { id: args.id }
+      });
+      const siblings = await Character.findAll({
+        where: {
+          fatherId: currChar.fatherId,
+          motherId: currChar.motherId,
+          liveBirth: true,
+          [Op.not]: {
+            id: currChar.id
+          }
+        },
+        order: [['birthDate', 'ASC']]
+      });
+      return siblings;
+    },
+    getSpouses: async () => {
       return await Character.findAll({
         where: { liveBirth: true },
         order: [['lastName', 'ASC'], ['firstName', 'ASC']]
