@@ -82,8 +82,9 @@ const CharacterForm = () => {
         // Update the cache by combining existing character data with the newly created data returned from the mutation
         cache.writeQuery({
           query: QUERY_FANDOM_CHARS,
+          variables: { fandomId: createChar.fandomId },
           // If we want new data to show up before or after existing data, adjust the order of this array
-          data: { allFandomChars: [...currentChars, createChar] },
+          data: { allFandomChars: [...currentChars, { ...createChar }] },
         });
       } catch (err) {
         console.error('error', JSON.parse(JSON.stringify(err)));
@@ -94,7 +95,7 @@ const CharacterForm = () => {
   const [updateChar] = useMutation(UPDATE_CHARACTER, {
     async update(cache, { data: { updateChar } }) {
       try {
-        // Update the cache by combining finding the character in the cache with the appropriate ID and replacing it with the newly created data returned from the mutation
+        // Update the cache by finding the character in the cache with the appropriate ID and replacing it with the newly created data returned from the mutation
         cache.writeQuery({
           query: QUERY_SINGLE_CHAR,
           variables: { id: params.charId },
