@@ -134,6 +134,21 @@ export const QUERY_FULL_SIBS = gql`
   }
 `;
 
+export const QUERY_HALF_SIBS = gql`
+query getHalfSiblings($charId: ID!) {
+    getHalfSiblings(id: $charId) {
+      id
+      firstName
+      nickName
+      lastName
+      suffix
+      fandomId
+      liveBirth
+      miscarriage
+    }
+  }
+`;
+
 export const QUERY_SPOUSES = gql`
   query getSpouses {
     getSpouses {

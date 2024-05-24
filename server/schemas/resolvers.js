@@ -57,6 +57,33 @@ const resolvers = {
       });
       return siblings;
     },
+    getHalfSiblings: async (_, args) => {
+      const currChar = await Character.findOne({
+        where: { id: args.id }
+      });
+      const dadSibs = await Character.findAll({
+        where: {
+          fatherId: currChar.fatherId,
+          liveBirth: true,
+          [Op.not]: {
+            motherId: currChar.motherId
+          }
+        },
+        order: [['birthDate', 'ASC']]
+      });
+      const momSibs = await Character.findAll({
+        where: {
+          motherId: currChar.motherId,
+          liveBirth: true,
+          [Op.not]: {
+            fatherId: currChar.fatherId
+          }
+        },
+        order: [['birthDate', 'ASC']]
+      });
+      const halfSibs = dadSibs.concat(momSibs);
+      return halfSibs;
+    },
     getSpouses: async () => {
       return await Character.findAll({
         where: { liveBirth: true },
