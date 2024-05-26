@@ -37,7 +37,7 @@ const resolvers = {
     allFandoms: async () => {
       return await Fandom.findAll({});
     },
-    getMen: async (_, args) => {
+    getParents: async (_, args) => {
       return await Character.findAll({
         where: { gender: args.gender, liveBirth: true },
         order: [['lastName', 'ASC'], ['firstName', 'ASC']]
@@ -93,12 +93,6 @@ const resolvers = {
         where: { liveBirth: true },
         order: [['lastName', 'ASC'], ['firstName', 'ASC']]
       });
-    },
-    getWomen: async (_, args) => {
-      return await Character.findAll({
-        where: { gender: args.gender, liveBirth: true },
-        order: [['lastName', 'ASC'], ['firstName', 'ASC']]
-      })
     },
     singleChar: async (_, args) => {
       const character = await Character.findOne({

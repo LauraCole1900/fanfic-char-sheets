@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { QUERY_ME, QUERY_FANDOM_CHARS, QUERY_ALL_FANDOMS, QUERY_MEN, QUERY_SPOUSES, QUERY_WOMEN, QUERY_SINGLE_CHAR, CREATE_CHARACTER, UPDATE_CHARACTER } from '../../utils/gql';
+import { QUERY_ME, QUERY_FANDOM_CHARS, QUERY_ALL_FANDOMS, QUERY_PARENTS, QUERY_SPOUSES, QUERY_SINGLE_CHAR, CREATE_CHARACTER, UPDATE_CHARACTER } from '../../utils/gql';
 import Auth from '../../utils/auth';
 
 const CharacterForm = () => {
@@ -46,20 +46,20 @@ const CharacterForm = () => {
   const { data: oneCharData, loading: oneCharLoading } = useQuery(QUERY_SINGLE_CHAR, {
     variables: { charId: params.charId || 0 },
   });
-  const { data: menData, loading: menLoading, error: menError } = useQuery(QUERY_MEN, {
+  const { data: menData, loading: menLoading, error: menError } = useQuery(QUERY_PARENTS, {
     variables: { gender: 'male' }
   });
   const { data: spouseData, loading: spouseLoading, error: spouseError } = useQuery(QUERY_SPOUSES);
-  const { data: womenData, loading: womenLoading, error: womenError } = useQuery(QUERY_WOMEN, {
+  const { data: womenData, loading: womenLoading, error: womenError } = useQuery(QUERY_PARENTS, {
     variables: { gender: 'female' }
   });
   const { data: fandomData, loading: fandomLoading, error: fandomError } = useQuery(QUERY_ALL_FANDOMS);
 
   const me = useMemo(() => { return meData?.me || meData?.currentId || {} }, [meData?.me, meData?.currentId]);
   const characterToEdit = useMemo(() => { return oneCharData?.singleChar || {} }, [oneCharData?.singleChar]);
-  const allMen = menData?.getMen || [];
+  const allMen = menData?.getParents || [];
   const allSpouses = spouseData?.getSpouses || [];
-  const allWomen = womenData?.getWomen || [];
+  const allWomen = womenData?.getParents || [];
   const allFandoms = fandomData?.allFandoms || [];
 
 
@@ -182,8 +182,20 @@ const CharacterForm = () => {
     return <h1>Loading....</h1>
   }
 
-  if (meError || menError || spouseError || womenError || fandomError) {
-    console.error(JSON.parse(JSON.stringify(meError)) || JSON.parse(JSON.stringify(menError)) || JSON.parse(JSON.stringify(womenError)));
+  if (fandomError) {
+    console.error(JSON.parse(JSON.stringify(fandomError)));
+  }
+  if (meError) {
+    console.error(JSON.parse(JSON.stringify(meError)));
+  }
+  if (menError) {
+    console.error(JSON.parse(JSON.stringify(menError)));
+  }
+  if (spouseError) {
+    console.error(JSON.parse(JSON.stringify(spouseError)));
+  }
+  if (womenError) {
+    console.error(JSON.parse(JSON.stringify(womenError)));
   }
 
   if (!Auth.loggedIn()) {

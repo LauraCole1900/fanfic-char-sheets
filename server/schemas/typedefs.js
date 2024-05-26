@@ -123,11 +123,10 @@ type Query {
   allChars: [Character]
   allFandomChars(fandomId: ID!): [Character]
   allFandoms: [Fandom]
-  getMen(gender: String!): [Character]
+  getParents(gender: String!): [Character]
   getFullSiblings(id: ID!): [Character]
   getHalfSiblings(id: ID!): [Character]
   getSpouses: [Character]
-  getWomen(gender: String!): [Character]
   singleChar(id: ID!): Character
 }
 
